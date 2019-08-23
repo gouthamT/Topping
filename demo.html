@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+  </head>
+  <body>
+    <h2>Grouping Form Data with Fieldset</h2>
+    <p>
+      The fieldset element is used to group related data in a form, and the
+      legend element defines a caption for the fieldset element.
+    </p>
+
+    <form>
+      <fieldset>
+        <legend>Personal information:</legend>
+        First name:<br />
+        <input id="firstname" type="text" name="firstname" value="" />
+        <br />
+        Last name:<br />
+        <input id="lastname" type="text" name="lastname" value="" />
+        <br /><br />
+        <input id="submitButton" type="submit" value="Submit" />
+      </fieldset>
+    </form>
+
+    <script>
+      document.getElementById("submitButton").addEventListener("click", myFunction);
+      function myFunction(e) {
+        console.log('submited');
+        e.preventDefault();
+      }
+    </script>
+  </body>
+</html>
