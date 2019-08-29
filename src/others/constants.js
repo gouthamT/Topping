@@ -1,0 +1,1 @@
+export const TYPE_OF_OBSERVABLE = 'OBSERVABLE', TYPE_OF_FUNCTION = 'function';

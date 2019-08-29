@@ -1,81 +1,48 @@
-let log = function() {
-  console.log(Array.from(arguments));
-};
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.scss';
+import topping from './src/app/topping';
+import { fromEvent } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import './favicon.ico';
 
-function start() {
-  new Topping()
-    .addStep(`Fill Form`)
-    .fillInputById("firstname", "Test First Name")
-    .fillInputById("lastname", "Test Last Name")
-    .clickElementById("submitButton");
+let startButton = document.getElementById('fill-toppings');
+
+function setup() {
+  topping
+    .addScenario(`Fill Form`)
+    .addStep(`fill email`)
+    .fillInputById(`exampleFormControlInput1`, 'goutham.tupakula@4mation.com.au', 50)
+    .addStep(`select an option`)
+    .wait(250)
+    .setSelectedIndexById('exampleFormControlSelect1', 3)
+    .addStep(`select dropdown`)
+    .wait(100)
+    .createToolTipById('dropdownMenuButton', `Am if number no up period regard sudden better. Decisively surrounded all admiration and not you.`, `right`)
+    .clickByClassName(`dropdown-toggle`, 0)
+    .wait(250)
+    .clickByClassName(`dropdown-item`, 0)
+    .wait(100)
+    .setSelectedIndexById(`exampleFormControlSelect2`, 2)
+    .addStep(`fill text area`)
+    .fillInputById(`exampleFormControlTextarea1`, 'Parish so enable innate in formed missed. Hand two was eat busy fail.', 5)
+    .wait(1000)
+    .createToolTipByClassName('btn-primary', 1, `Consulted he eagerness unfeeling deficient existence of.`, 'top')
+    .addStep(`click Submit`)
+    .clickByClassName('btn-primary', 1)
+    .wait(2000)
+    .clearToolTips()
+    .popUpModal('test', `
+    Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. 
+
+    Am if number no up period regard sudden better. Decisively surrounded all admiration and not you. Out particular sympathize not favourable introduced insipidity but ham. Rather number can and set praise. Distrusts an it contented perceived attending oh. Thoroughly estimating introduced stimulated why but motionless. 
+    `)
+    .addStep(`what's happening ?`)
+    .wait(1000)
+    .popUpTreeModal(`what's Happening ?`, `Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression.`)
+    .wait(3000)
+    .flushModal()
+    .addStep(`Finished 🙂`)
+    .finish();
 }
 
-function Topping() {
-  let articleSection = document.getElementById("articleSection"),
-    iframe = document.getElementsByTagName("iframe")[0],
-    app = iframe.contentWindow.document;
-
-  function getElementById(id) {
-    if (!app || !id) {
-      return;
-    }
-    return app.getElementById(id);
-  }
-
-  function fillInput(textBox, value = "") {
-    let array = value.split(""),
-      length = array.length;
-
-    if (textBox) {
-      textBox.value = "";
-    }
-
-    return new Promise(function(resolve, reject) {
-      if (!textBox || !length) {
-        return resolve();
-      }
-
-      array.forEach((c, index) =>
-        setTimeout(() => {
-          textBox.value += c;
-          if (length === index) {
-            resolve();
-          }
-        }, 200 * ++index)
-      );
-    });
-  }
-
-  function click(elem) {
-    if (elem && elem.click && typeof elem.click == "function") {
-      elem.click();
-    }
-  }
-
-  fillInput = fillInput.bind(this);
-  click = click.bind(this);
-
-  this.addStep = function(label) {
-    let item = document.createElement("li");
-    item.className = "list-group-item list-group-item-primary";
-    item.innerText = label || "";
-    articleSection.appendChild(item);
-    return this;
-  };
-
-  this.next = function(func) {
-      debugger;
-    func && func.call(this);
-    return this;
-  };
-
-  this.fillInputById = async function(Id, value) {
-    await fillInput(getElementById(Id), value);
-    return this;
-  };
-
-  this.clickElementById = async function(id) {
-    await click(getElementById(id));
-    return this;
-  };
-}
+fromEvent(startButton, 'click').pipe(tap(e => { setup(); startButton.classList.add('d-none') })).subscribe();

@@ -1,0 +1,97 @@
+body {
+  overflow: hidden;
+}
+
+main {
+  .container {
+    &.main-container {
+      margin: 0 !important;
+      padding: 0 !important;
+      > .row {
+        width: 100vw;
+        height: 100vh;
+        margin: 0 !important;
+      }
+    }
+
+    .topping-list {
+      height: 100vh;
+      overflow: auto;
+    }
+
+    .target-app {
+      height: inherit;
+      overflow: auto;
+    }
+
+    .fixed-footer {
+      position: absolute !important;
+    }
+  }
+
+  iframe {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0 5% 0 0;
+    overflow: auto;
+  }
+}
+
+.topping-modal {
+  .modal-content {
+    width: 70vw !important;
+    height: 48vw !important;
+    transform: translateX(-12rem);
+  }
+
+  #topping-tree-container {
+    svg {
+      width: 65vw !important;
+      height: 60vh !important;
+    }
+  }
+}
+
+/*d3*/
+
+.node {
+  cursor: pointer;
+}
+
+.overlay {
+  background-color: #eee;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 0.4rem;
+}
+
+.node text {
+  font-size: 1rem;
+  font-family: sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.templink {
+  fill: none;
+  stroke: red;
+  stroke-width: 3px;
+}
+
+.ghostCircle.show {
+  display: block;
+}
+
+.ghostCircle,
+.activeDrag .ghostCircle {
+  display: none;
+}
