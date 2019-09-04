@@ -1,9 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.scss';
 import topping from './src/app/topping';
 import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import './favicon.ico';
 
 let startButton = document.getElementById('fill-toppings');
 

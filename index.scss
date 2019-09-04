@@ -1,4 +1,4 @@
-body {
+#topping-body {
   overflow: hidden;
 }
 
@@ -31,18 +31,17 @@ main {
 
   iframe {
     position: fixed;
-    width: 100%;
+    width: 73.5%;
     height: 100%;
     border: none;
-    padding: 0 5% 0 0;
     overflow: auto;
   }
 }
 
 .topping-modal {
   .modal-content {
-    width: 70vw !important;
-    height: 48vw !important;
+    width: 75vw !important;
+    height: 65vw !important;
     transform: translateX(-12rem);
   }
 

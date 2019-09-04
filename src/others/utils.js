@@ -2,7 +2,7 @@ import tree from '../helpers/dndTree';
 import treeData from '../helpers/sample';
 import Popper from 'popper.js';
 
-let accordionId = 0, modalHolder = document.createElement('div');
+let accordionId = 0;
 
 const GetAccordionListItem = (id, label) => `<div class="card">
 <div class="card-header" id="headingOne">
@@ -73,7 +73,7 @@ export function appendListItemToAccordion(accordion, label) {
   if (!accordion || !accordionId) { return; }
   let accordionListItem = accordion.querySelector(ListGroupQuery(accordionId));
   accordionListItem.insertAdjacentHTML('beforeend', GetListItem(label));
-  accordionListItem.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+  toView(accordionListItem);
 }
 
 /**
@@ -98,7 +98,7 @@ export function getElementById(id) {
  * @param {*} title 
  * @param {*} content 
  */
-export function appendModal(title, content) {
+export function appendModal(modalHolder, title, content) {
   modalHolder.classList.remove('d-none');
   modalHolder.innerHTML = GetModal(title, content);
   document.body.appendChild(modalHolder);
@@ -114,7 +114,7 @@ export function appendModal(title, content) {
  * @param {*} content 
  * @param {*} treeSource 
  */
-export function appendTreeModal(title, content, treeSource) {
+export function appendTreeModal(modalHolder, title, content, treeSource) {
   modalHolder.classList.remove('d-none');
   modalHolder.innerHTML = GetTreeModal(title, content);
   document.body.appendChild(modalHolder);
@@ -128,8 +128,9 @@ export function appendTreeModal(title, content, treeSource) {
 /**
  * flushModal
  */
-export function flushModal() {
-  modalHolder.querySelector(`div.modal`).classList.remove('show');
+export function flushModal(modalHolder) {
+  let modal = modalHolder.querySelector(`div.modal`);
+  modal && modal.classList.remove('show');
   setTimeout(() => {
     modalHolder.classList.add('d-none');
   });
@@ -173,6 +174,14 @@ export function createTooltipAtElement(parentElement, label = '', position = 'to
  */
 export function focusElement(element) {
   element && element.focus && typeof element.focus == "function" && element.focus();
+}
+
+/**
+ * toView
+ * @param {*} element 
+ */
+export function toView(element) {
+  element && element.scrollIntoView && element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });;
 }
 
 /**

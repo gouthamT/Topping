@@ -1,9 +1,7 @@
-import { of, empty, from } from 'rxjs';
-import { concatMap, delay, tap, mergeMap } from 'rxjs/operators';
+import { of, empty, from, fromEvent } from 'rxjs';
+import { concatMap, delay, tap, mergeMap, map } from 'rxjs/operators';
 import ToppingBase from './base';
 import {
-  appendToAccordion,
-  appendListItemToAccordion,
   appendModal,
   appendTreeModal,
   flushModal,
@@ -13,9 +11,13 @@ import {
   focusElement,
   setElementSelectedIndex,
   setElementValue,
-  clickElement
+  clickElement,
+  toView
 } from '../others/utils';
 import { TYPE_OF_OBSERVABLE, TYPE_OF_FUNCTION } from '../others/constants';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../index.scss';
+import '../../favicon.ico';
 
 class Topping extends ToppingBase {
 
@@ -29,7 +31,7 @@ class Topping extends ToppingBase {
    * @param {*} label 
    */
   addScenario(label) {
-    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate: () => appendToAccordion(this.articleSection, label) });
+    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate: () => { window.top.postMessage({ target: 'echo-addScenario', value: label }, '*') } });
     return this;
   }
 
@@ -38,7 +40,7 @@ class Topping extends ToppingBase {
    * @param {*} label 
    */
   addStep(label) {
-    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate: () => appendListItemToAccordion(this.articleSection, label) });
+    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate: () => { window.top.postMessage({ target: 'echo-addStep', value: label }, '*') } });
     return this;
   }
 
@@ -49,6 +51,7 @@ class Topping extends ToppingBase {
    * @param {*} delayInterval 
    */
   fillInputById(id, value, delayInterval) {
+    debugger;
     let fillValue = function (element, value) {
       element.value += value || ""
     }, clearValue = function (element) {
@@ -232,6 +235,31 @@ class Topping extends ToppingBase {
   }
 
   /**
+   * scrollElementToViewById
+   * @param {*} id 
+   */
+  scrollElementToViewById(id = null) {
+    let delegate = function () {
+      toView(getElementById(id));
+    };
+    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
+    return this;
+  }
+
+  /**
+   * scrollElementToViewByClassName
+   * @param {*} className 
+   * @param {*} idx 
+   */
+  scrollElementToViewByClassName(className, idx) {
+    let delegate = function () {
+      toView(getElementByClassName(className, idx));
+    };
+    this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
+    return this;
+  }
+
+  /**
    * wait
    * @param {*} interval 
    */
@@ -249,7 +277,7 @@ class Topping extends ToppingBase {
    * @param {*} delay 
    */
   popUpModal(header, content) {
-    let delegate = () => appendModal(header, content);
+    let delegate = () => appendModal(this.modalHolder, header, content);
     this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
     return this;
   }
@@ -261,7 +289,7 @@ class Topping extends ToppingBase {
    * @param {*} delay 
    */
   popUpTreeModal(header, content, treeSource) {
-    let delegate = () => appendTreeModal(header, content, treeSource);
+    let delegate = () => appendTreeModal(this.modalHolder, header, content, treeSource);
     this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
     return this;
   }
@@ -271,7 +299,7 @@ class Topping extends ToppingBase {
    * @param {*} delay 
    */
   flushModal() {
-    let delegate = () => flushModal();
+    let delegate = () => flushModal(this.modalHolder);
     this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
     return this;
   }
@@ -296,7 +324,7 @@ class Topping extends ToppingBase {
    * @param {*} label 
    * @param {*} placement 
    */
-  createToolTipByClassName(className, idx = 1, label = '', placement = 'top') {
+  createToolTipByClassName(className, idx = 0, label = '', placement = 'top') {
     let delegate = () => { this.toolTips.push(createTooltipAtElement(getElementByClassName(className, idx), label, placement)) };
     this.sub$.next({ type: TYPE_OF_FUNCTION, delegate });
     return this;
@@ -314,5 +342,20 @@ class Topping extends ToppingBase {
 }
 
 let topping = new Topping();
+
+fromEvent(window, 'message').pipe(
+  map(event => {
+    if (!event || !event.data || !event.data.values) return;
+    return event.data;
+  }),
+  tap(source => {
+    if (!source) return;
+    let data;
+    for (var value of source.values()) {
+      data = value[1];
+      data && data.target && topping[data.target] && topping[data.target](...data.arguments);
+    }
+  })
+).subscribe();
 
 export default topping;
