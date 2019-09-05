@@ -6,10 +6,12 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: {topping: './src/app/topping.js', toppingRelay: './src/relay/relay.js'},
+  entry: { topping: './src/topping/topping.js', toppingRelay: './src/toppingRelay/toppingRelay.js' },
+
+  mode: 'production',
 
   output: {
-    path: path.resolve(__dirname, '../test/topping/'),
+    path: path.resolve(__dirname, '../../test/topping/'),
     filename: '[name].js',
     publicPath: '/'
   },
@@ -53,7 +55,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new HtmlWebpackPlugin({ template: './index.html' }),
+    new HtmlWebpackPlugin({ template: './default.html' }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",

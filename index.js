@@ -1,11 +1,11 @@
-import topping from './src/app/topping';
+import toppingRelay from './src/toppingRelay/toppingRelay';
 import { fromEvent } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 let startButton = document.getElementById('fill-toppings');
 
 function setup() {
-  topping
+  toppingRelay
     .addScenario(`Fill Form`)
     .addStep(`fill email`)
     .fillInputById(`exampleFormControlInput1`, 'goutham.tupakula@4mation.com.au', 50)

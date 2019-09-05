@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode=development --inline --progress --colors",
-    "build": "webpack --config webpack.prod.config.js --mode=production"
+    "start": "webpack-dev-server --config build-config/webpack.config.js --inline --progress --colors",
+    "build": "webpack --config build-config/webpack.prod.config.js --inline --progress --colors"
   },
   "keywords": [],
   "author": "",

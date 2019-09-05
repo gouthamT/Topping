@@ -2,12 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './index.js',
-
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
@@ -32,7 +30,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [{
-          loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          loader: 'style-loader'
         }, {
           loader: 'css-loader',
         }, {
@@ -57,7 +55,6 @@ module.exports = {
   },
 
   plugins: [
-    new BundleAnalyzerPlugin({ openAnalyzer: !devMode }),
     new HtmlWebpackPlugin({ template: './index.html' }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({

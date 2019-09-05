@@ -1,5 +1,4 @@
 import tree from '../helpers/dndTree';
-import treeData from '../helpers/sample';
 import Popper from 'popper.js';
 
 let accordionId = 0;
@@ -101,7 +100,6 @@ export function getElementById(id) {
 export function appendModal(modalHolder, title, content) {
   modalHolder.classList.remove('d-none');
   modalHolder.innerHTML = GetModal(title, content);
-  document.body.appendChild(modalHolder);
 
   setTimeout(() => {
     modalHolder.querySelector(`div.modal`).classList.add('show');
@@ -117,8 +115,8 @@ export function appendModal(modalHolder, title, content) {
 export function appendTreeModal(modalHolder, title, content, treeSource) {
   modalHolder.classList.remove('d-none');
   modalHolder.innerHTML = GetTreeModal(title, content);
-  document.body.appendChild(modalHolder);
-  tree(treeSource || treeData, `topping-tree-container`);
+
+  tree(treeSource, `topping-tree-container`);
 
   setTimeout(() => {
     modalHolder.querySelector(`div.modal`).classList.add('show');

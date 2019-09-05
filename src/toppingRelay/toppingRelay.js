@@ -1,6 +1,6 @@
-import { of, empty, from, fromEvent } from 'rxjs';
-import { concatMap, delay, tap, mergeMap, map } from 'rxjs/operators';
-import ToppingBase from './base';
+import { of, empty, from } from 'rxjs';
+import { concatMap, delay, tap, mergeMap } from 'rxjs/operators';
+import ToppingRelayBase from './toppingRelayBase';
 import {
   appendModal,
   appendTreeModal,
@@ -19,11 +19,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../index.scss';
 import '../../favicon.ico';
 
-class Topping extends ToppingBase {
+class ToppingRelay extends ToppingRelayBase {
 
   constructor() {
     super();
     this.toolTips = [];
+
   }
 
   /**
@@ -339,23 +340,17 @@ class Topping extends ToppingBase {
     return this;
   }
 
+  /**
+   * finishes topping
+   */
+  finish() {
+    this.popUpModal(`ciao`, `Finished 🙂`);
+    this.end$.next(`Finished`);
+    return this;
+  }
+
 }
 
-let topping = new Topping();
+let toppingRelay = new ToppingRelay();
 
-fromEvent(window, 'message').pipe(
-  map(event => {
-    if (!event || !event.data || !event.data.values) return;
-    return event.data;
-  }),
-  tap(source => {
-    if (!source) return;
-    let data;
-    for (var value of source.values()) {
-      data = value[1];
-      data && data.target && topping[data.target] && topping[data.target](...data.arguments);
-    }
-  })
-).subscribe();
-
-export default topping;
+export default toppingRelay;

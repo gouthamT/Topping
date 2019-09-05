@@ -4,13 +4,16 @@ import {
   getElementById
 } from '../others/utils';
 
-class Relay {
+class Topping {
 
   constructor() {
+    let self = this;
     this.instructions = new Map();
     this.instructionNumber = 0;
     this.articleSection = getElementById("toppings");
-    let self = this;
+    this.target;
+    this.onLoadCallBack;
+    // event listeners
     window.addEventListener('message', function (event) {
       if (!event || !event.data) return;
       switch (event.data.target) {
@@ -31,6 +34,31 @@ class Relay {
         default: break;
       }
     });
+
+    window.onload = function () {
+      self.target = getElementById("target-frame");
+      self.target.onload = self.onload.bind(self);
+    };
+  }
+
+  /**
+   * sets the url to be launched
+   * @param {*} url 
+   * @param {*} callBack on Load 
+   */
+  launch(url, callback) {
+    this.target.src = url || "./topping/index.html";
+    this.onLoadCallBack = callback;
+    return this;
+  }
+
+  /**
+   * onloads callbacks function
+   * @param {*} commandsFunction | function
+   */
+  onload() {
+    this.onLoadCallBack && this.onLoadCallBack();
+    return this;
   }
 
 
@@ -339,5 +367,5 @@ class Relay {
 
 }
 
-window.topping = {};
-window.topping.Relay = new Relay();
+var topping = new Topping();
+window.topping = topping;
