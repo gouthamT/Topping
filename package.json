@@ -1,11 +1,12 @@
 {
-  "name": "berrytopping",
+  "name": "topping",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config build-config/webpack.config.js --inline --progress --colors",
-    "build": "webpack --config build-config/webpack.prod.config.js --inline --progress --colors"
+    "build": "webpack --config build-config/webpack.prod.config.js",
+    "build-server": "webpack --config build-config/webpack.server.config.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
     "css-hot-loader": "^1.4.4",
     "css-loader": "^2.1.1",
     "file-loader": "^4.2.0",
@@ -34,12 +36,17 @@
     "webpack": "^4.32.1",
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-dev-server": "^3.4.1",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "d3": "^3.5.17",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "jquery": "^3.4.1",
+    "open": "^6.4.0",
+    "path": "^0.12.7",
     "popper.js": "^1.15.0",
     "rxjs": "^6.5.2",
     "rxjs-compat": "^6.5.2"

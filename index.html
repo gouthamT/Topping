@@ -2,14 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="shortcut icon" href="favicon.ico">
-  <title>BerryTopping</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Topping</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="./quarry.js"></script>
+  <script src="./topping.js"></script>
+  <link rel="shortcut icon" href="./favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="./toppingRelay.css" />
 </head>
 
-<body>
+<body id="topping-body">
   <main>
     <div class="container main-container">
       <div class="row">
@@ -18,62 +22,13 @@
           <div class="accordion" id="toppings">
           </div>
           <footer class="container text-center fixed-bottom fixed-footer">
-            <button id="fill-toppings" type="button" class="btn btn-primary mb-3">
+            <button id="fill-toppings" type="button" class="btn btn-primary mb-3" onclick="start(event)">
               Start
             </button>
           </footer>
         </section>
         <section class="col-9 target-app">
-          <form class="p-5" onsubmit="onSubmit(event)">
-            <div class="form-group">
-              <label for="exampleFormControlInput1">Email address</label>
-              <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Example select</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <div class="dropdown">
-                <label for="exampleFormControlSelect1">Example Dropdown</label>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect2">Example multiple select</label>
-              <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Example textarea</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-          <script>
-            function onSubmit(e) {
-              e && e.preventDefault();
-            }
-          </script>
+          <iframe id="target-frame" src="./demo.html" scrolling="yes"></iframe>
         </section>
       </div>
     </div>

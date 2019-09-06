@@ -47,7 +47,7 @@ class Topping {
    * @param {*} callBack on Load 
    */
   launch(url, callback) {
-    this.target.src = url || "./topping/index.html";
+    this.target.src = url || "./demo.html";
     this.onLoadCallBack = callback;
     return this;
   }

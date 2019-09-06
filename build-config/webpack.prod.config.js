@@ -4,6 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const destPath = '../public/';
 
 module.exports = {
   entry: { topping: './src/topping/topping.js', toppingRelay: './src/toppingRelay/toppingRelay.js' },
@@ -11,12 +13,10 @@ module.exports = {
   mode: 'production',
 
   output: {
-    path: path.resolve(__dirname, '../../test/topping/'),
+    path: path.resolve(__dirname, destPath),
     filename: '[name].js',
     publicPath: '/'
   },
-
-  watch: true,
 
   module: {
     rules: [
@@ -55,11 +55,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new HtmlWebpackPlugin({ template: './default.html' }),
+    new HtmlWebpackPlugin({ inject: false, template: './index.html' }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    })
+    }),
+    new CopyPlugin([
+      { from: './exports/**/*', to: './', flatten: true }
+    ])
   ]
 };
