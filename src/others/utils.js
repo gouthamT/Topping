@@ -85,6 +85,15 @@ export function getElementByClassName(className, idx = 0) {
 }
 
 /**
+ * getElementByTagName
+ * @param {*} tagName 
+ * @param {*} idx 
+ */
+export function getElementByTagName(tagName, idx = 0) {
+  return document.getElementsByTagName(tagName)[idx];
+}
+
+/**
  * getElementById
  * @param {*} id 
  */
@@ -115,8 +124,7 @@ export function appendModal(modalHolder, title, content) {
 export function appendTreeModal(modalHolder, title, content, treeSource) {
   modalHolder.classList.remove('d-none');
   modalHolder.innerHTML = GetTreeModal(title, content);
-
-  tree(treeSource, `topping-tree-container`);
+  tree(treeSource, modalHolder.querySelector(`#topping-tree-container`));
 
   setTimeout(() => {
     modalHolder.querySelector(`div.modal`).classList.add('show');
@@ -145,11 +153,12 @@ export function createTooltipAtElement(parentElement, label = '', position = 'to
 
   let tooltip = document.createElement('div');
   tooltip.innerHTML = `
-  <div class="tooltip-inner border-info p-3 mb-2 bg-dark text-white">
+  <div style="color: #fff!important;padding: 1rem!important;margin-bottom: .5rem!important;border-color: #17a2b8!important;background-color: #343a40!important;max-width: 200px;text-align: center;border-radius: .25rem;">
     ${label}
   </div>
   `;
-  tooltip.className = `tooltip show bs-tooltip-${position} topping-tool-tip`;
+  tooltip.className = `topping-tool-tip`;
+  tooltip.style.zIndex = 100000;
   document.body.append(tooltip);
   return new Popper(parentElement, tooltip, {
     removeOnDestroy: true,
@@ -210,4 +219,19 @@ export function setElementValue(element, value) {
  */
 export function clickElement(element) {
   element && element.click && typeof element.click == "function" && element.click();
+}
+
+/**
+ * fillElementValue
+ * @param {*} element 
+ * @param {*} value 
+ */
+export function fillElementValue(element, value) {
+  if (!element) return;
+  let actualValue = element.value || "";
+  actualValue += value || ""
+  let nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set,
+    event = new Event('input', { bubbles: true });
+  nativeInputValueSetter.call(element, actualValue);
+  element.dispatchEvent(event);
 }

@@ -1,6 +1,7 @@
 import { Subject, of, fromEvent } from 'rxjs';
 import { concatMap, delay, tap, takeUntil, map } from 'rxjs/operators';
 import { TYPE_OF_OBSERVABLE, TYPE_OF_FUNCTION } from '../others/constants';
+import css from './css';
 import $ from "jquery";
 import '../helpers/dndTree.js';
 
@@ -14,16 +15,12 @@ export default class ToppingRelayBase {
     this.shadowHost.id = `shadow-hosted-topping-app`;
     this.modalHolder = document.createElement('div');
     $(document).ready(function () {
-      let shadowRoot = self.shadowHost.attachShadow({ mode: 'open' });
-      let link = document.createElement('link');
-      link.id = `toppings-stylesheet`;
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = './topping/toppingRelay.css';
-      link.media = 'all';
-      shadowRoot.appendChild(link);
+      let shadowRoot = self.shadowHost.attachShadow({ mode: 'open' }),
+        style = document.createElement('style');
+      style.appendChild(document.createTextNode(css));
+      shadowRoot.appendChild(style);
       shadowRoot.appendChild(self.modalHolder);
-      document.body.appendChild(shadowRoot);
+      document.body.appendChild(self.shadowHost);
     });
 
     this.sub$.pipe(

@@ -54,7 +54,6 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new HtmlWebpackPlugin({ inject: false, template: './index.html' }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
@@ -62,7 +61,8 @@ module.exports = {
       chunkFilename: "[id].css"
     }),
     new CopyPlugin([
-      { from: './exports/**/*', to: './', flatten: true }
+      { from: './exports/**/*', to: './', flatten: true },
+      { from: './README.md', to: './README.md' }
     ])
   ]
 };

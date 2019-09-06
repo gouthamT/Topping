@@ -7,13 +7,14 @@ const express = require('express'),
   port = 7063;
 
 app.use(express.static(DIST_DIR))
+app.use(express.static(path.join(DIST_DIR, '../../topping')))
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(HTML_FILE)
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}/`);
+  console.log(`Toppings app listening on port http://localhost:${port}/`);
   open(`http://localhost:${port}/`);
   console.log('Press Ctrl+C to quit.')
 })

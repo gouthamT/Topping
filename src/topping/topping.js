@@ -116,6 +116,21 @@ class Topping {
   }
 
   /**
+   * fills input value by tagName name with delay between each character
+   * @param {*} tagName
+   * @param {*} idx 
+   * @param {*} value 
+   * @param {*} delayInterval 
+   */
+  fillInputByTagName(tagName, idx = 0, value, delayInterval) {
+    this.instructions.set(++this.instructionNumber, {
+      target: `fillInputByTagName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
    * Clicks element after certain time interval
    * @param {*} id 
    * @param {*} delayInterval 
@@ -137,6 +152,20 @@ class Topping {
   clickByClassName(className, idx = 0) {
     this.instructions.set(++this.instructionNumber, {
       target: `clickByClassName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
+   * clicks an element provided query selector class name, index, delayInterval
+   * @param {*} tagName 
+   * @param {*} idx 
+   * @param {*} delayInterval 
+   */
+  clickByTagName(tagName, idx = 0) {
+    this.instructions.set(++this.instructionNumber, {
+      target: `clickByTagName`,
       arguments: [...arguments]
     });
     return this;
@@ -172,6 +201,21 @@ class Topping {
   }
 
   /**
+   * setValueByTagName
+   * @param {*} tagName 
+   * @param {*} idx
+   * @param {*} value 
+   * @param {*} delayInterval 
+   */
+  setValueByTagName(tagName, idx, value = '') {
+    this.instructions.set(++this.instructionNumber, {
+      target: `setValueByTagName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
    * setIndexById
    * @param {*} id 
    * @param {*} index 
@@ -195,6 +239,21 @@ class Topping {
   setSelectedIndexByClassName(className, idx, selectedIndex = 0) {
     this.instructions.set(++this.instructionNumber, {
       target: `setSelectedIndexByClassName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
+   * setSelectedIndexByTagName
+   * @param {*} tagName 
+   * @param {*} idx
+   * @param {*} selectedIndex 
+   * @param {*} delayInterval 
+   */
+  setSelectedIndexByTagName(tagName, idx, selectedIndex = 0) {
+    this.instructions.set(++this.instructionNumber, {
+      target: `setSelectedIndexByTagName`,
       arguments: [...arguments]
     });
     return this;
@@ -228,6 +287,19 @@ class Topping {
   }
 
   /**
+   * focusElementByTagName
+   * @param {*} tagName 
+   * @param {*} idx
+   */
+  focusElementByTagName(tagName, idx) {
+    this.instructions.set(++this.instructionNumber, {
+      target: `focusElementByTagName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
    * scrollElementToViewById
    * @param {*} id 
    */
@@ -253,8 +325,21 @@ class Topping {
   }
 
   /**
+   * scrollElementToViewByTagName
+   * @param {*} tagName 
+   * @param {*} idx 
+   */
+  scrollElementToViewByTagName(tagName, idx) {
+    this.instructions.set(++this.instructionNumber, {
+      target: `scrollElementToViewByTagName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
    * wait
-   * @param {*} interval 
+   * @param {*} interval | minutes
    */
   wait(interval = 0) {
     this.instructions.set(++this.instructionNumber, {
@@ -335,6 +420,21 @@ class Topping {
   }
 
   /**
+   * createToolTipByTagName
+   * @param {*} tagName 
+   * @param {*} idx 
+   * @param {*} label 
+   * @param {*} placement 
+   */
+  createToolTipByTagName(tagName, idx = 1, label = '', placement = 'top') {
+    this.instructions.set(++this.instructionNumber, {
+      target: `createToolTipByTagName`,
+      arguments: [...arguments]
+    });
+    return this;
+  }
+
+  /**
    * clear all the tooltips
    */
   clearToolTips() {
@@ -368,4 +468,7 @@ class Topping {
 }
 
 var topping = new Topping();
+
 window.topping = topping;
+
+export default topping;

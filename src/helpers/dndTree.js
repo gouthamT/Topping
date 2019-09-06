@@ -126,13 +126,13 @@ function createTree(treeData, container) {
     // if nodes has children, remove the links and nodes
     if (nodes.length > 1) {
       // remove link paths
-      links = tree.links(nodes);
-      nodePaths = svgGroup.selectAll("path.link")
+      tree.links(nodes);
+      svgGroup.selectAll("path.link")
         .data(links, function (d) {
           return d.target.id;
         }).remove();
       // remove child nodes
-      nodesExit = svgGroup.selectAll("g.node")
+      svgGroup.selectAll("g.node")
         .data(nodes, function (d) {
           return d.id;
         }).filter(function (d, i) {
@@ -156,7 +156,7 @@ function createTree(treeData, container) {
   }
 
   // define the baseSvg, attaching a class for styling and the zoomListener
-  var baseSvg = d3.select(`#${container}`).append("svg")
+  var baseSvg = d3.select(container).append("svg")
     .attr("width", viewerWidth)
     .attr("height", viewerHeight)
     .attr("class", "overlay")
@@ -531,11 +531,12 @@ function createTree(treeData, container) {
   // Layout the tree initially and center on the root node.
   update(root);
   centerNode(root);
+  svgGroup.transition().attr("transform", "translate(" + 150 + "," + 150 + ")scale(" + 1 + ")");
 }
 
-var Tree = function (treeData, parentId) {
-  if (!treeData || !parentId) { return; }
-  createTree(treeData, parentId);
+var Tree = function (treeData, parent) {
+  if (!treeData || !parent) { return; }
+  createTree(treeData, parent);
 };
 
 export default Tree;

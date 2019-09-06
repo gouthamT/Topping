@@ -22,7 +22,7 @@
           <div class="accordion" id="toppings">
           </div>
           <footer class="container text-center fixed-bottom fixed-footer">
-            <button id="fill-toppings" type="button" class="btn btn-primary mb-3" onclick="start(event)">
+            <button id="fill-toppings" type="button" class="btn btn-primary mb-3" onclick="startToppings(event)">
               Start
             </button>
           </footer>
@@ -33,6 +33,13 @@
       </div>
     </div>
   </main>
+  <script>
+    function startToppings(event) {
+      let target = event.target || event.srcElement;
+      target.style.visibility = 'hidden';
+      start(event);
+    }
+  </script>
 </body>
 
 </html>
