@@ -1,10 +1,23 @@
 {
   "name": "topping",
-  "version": "1.0.6",
-  "description": "",
+  "version": "1.0.8",
+  "description": "topping is a javascript package for writing workflows/walkthroughs/enriched readme.",
   "main": "topping.js",
   "scripts": {},
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gouthamT/Topping.git"
+  },
+  "keywords": [
+    "topping",
+    "goutham",
+    "walkthrough",
+    "enriched readme"
+  ],
   "author": "Goutham Tupakula",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gouthamT/Topping/issues"
+  },
+  "homepage": "https://github.com/gouthamT/Topping#readme"
 }

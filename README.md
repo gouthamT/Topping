@@ -2,6 +2,22 @@
 
 Topping is a JavaScript library for writing flows/walkthroughs/enriched readme.
 
+## Use case
+* Imagine a complex application, new joiners or team mates who started working on this application with zero knowledge might not know -
+  * how application works?
+  * what's the architecture behind app? 
+  * why it was built for ?..etc.
+
+* Isn’t it would be cool if there is an documentation in place with which helps user to understand better about the app.
+
+* This package which helps user to write walk through / tour about application.
+
+* [Sample App with source code](https://github.com/gouthamT/pokedex)
+
+* [example App](https://gouthamt.github.io/pokedex/)  --> [Demo topping App](https://gouthamt.github.io/topping-sample-app/)
+
+* [more info here](https://medium.com/@tupakulagoutham/topping-javascript-library-to-write-walk-through-ede6653179df)
+
 ## Installation
 
 `npm i -D topping`
@@ -22,29 +38,36 @@ or
 
 `node node_modules\topping\startToppings`
 
-## List of available of functions
+## List of available functions
 
 * launch(url, callback)
 * addScenario(label)
 * addStep(label)
 * fillInputById(id, value, delayInterval)
 * fillInputByClassName(className, idx = 0, value, delayInterval)
+* fillInputByTagName(tagName, idx = 0, value, delayInterval)
 * clickById(id)
 * clickByClassName(className, idx)
+* clickByTagName(tagName, idx)
 * setValueById(id, value)
 * setValueByClassName(className, idx, value)
+* setValueByTagName(tagName, idx, value)
 * setSelectedIndexById(id, index)
 * setSelectedIndexByClassName(className, idx, selectedIndex)
+* setSelectedIndexByTagName(tagName, idx, selectedIndex)
 * focusElementById(id)
 * focusElementByClassName(className, idx)
+* focusElementByTagName(tagName, idx)
 * scrollElementToViewById(id)
 * scrollElementToViewByClassName(className, idx)
+* scrollElementToViewByTagName(tagName, idx)
 * wait(interval)
 * popUpModal(header, content)
 * popUpTreeModal(header, content, treeSource)
 * flushModal()
 * createToolTipById(id, label, placement = 'top')
 * createToolTipByClassName(className, idx, label, placement = 'top')
+* createToolTipByTagName(tagName, idx, label, placement = 'top')
 * clearToolTips()
 * play()
 * finish()
