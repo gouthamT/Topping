@@ -454,11 +454,13 @@ pre code {
 
 @media (min-width: 576px) {
   .container {
-    max-width: 540px; } }
+    max-width: 540px; }
+    .topping-modal .modal-content { transform: translateX(1vw); } }
 
 @media (min-width: 768px) {
   .container {
-    max-width: 720px; } }
+    max-width: 720px; } 
+    .topping-modal .modal-content { transform: translateX(-10vw); }}
 
 @media (min-width: 992px) {
   .container {
@@ -7505,8 +7507,7 @@ main iframe {
 
 .topping-modal .modal-content {
   width: 75vw !important;
-  height: 65vw !important;
-  transform: translateX(-12rem); }
+  height: 65vw !important; }
 
 .topping-modal #topping-tree-container svg {
   width: 65vw !important;

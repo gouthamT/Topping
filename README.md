@@ -30,6 +30,14 @@ Topping is a JavaScript library for writing flows/walkthroughs/enriched readme.
 
 * make sure to update your root html file (or) import `node_modules\topping\toppingRelay.js` file in dev mode only.
 
+
+```
+// in index.js
+if (process.env.NODE_ENV === 'development') {
+  import('topping/toppingRelay')
+}
+```
+
 ## Launch Topping
 
 `npm run startToppings` 
@@ -118,7 +126,7 @@ function start() {
       topping
       .addScenario(`Fill Form`)
         .addStep(`fill email`)
-        .fillInputById(`exampleFormControlInput1`, 'goutham.tupakula@4mation.com.au', 50)
+        .fillInputById(`exampleFormControlInput1`, 'tupakulagoutham@gmail.com', 50)
         .addStep(`select an option`)
         .wait(.25)
         .setSelectedIndexById('exampleFormControlSelect1', 3)

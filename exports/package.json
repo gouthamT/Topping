@@ -1,6 +1,6 @@
 {
   "name": "topping",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "topping is a javascript package for writing workflows/walkthroughs/enriched readme.",
   "main": "topping.js",
   "scripts": {},
